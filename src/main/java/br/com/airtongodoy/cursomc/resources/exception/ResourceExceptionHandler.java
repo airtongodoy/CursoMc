@@ -9,6 +9,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import br.com.airtongodoy.cursomc.services.exception.ObjectNotFoundException;
 
+/*
+ * Por Default @ControllerAdvice será aplicada para TODAS as classes que usam @Controller (@RestController extends desta também)
+ * 	-> Se quiser limitar a algum pacote especifico deve usar @ControllerAdvice("meu.pacote.desejado") ou citar uma classe e ele irá definir o pacote dela como alvo (@ControllerAdvice(basePackageClasses = MinhaClasse.class))
+ *  -> Se quiser limitar somente para alguma classe, deve usar assim: @ControllerAdvice(assignableTypes = MinhaClasseRestController.class)
+ * 
+ */
 @ControllerAdvice
 public class ResourceExceptionHandler {
 

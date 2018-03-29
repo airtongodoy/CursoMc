@@ -19,9 +19,9 @@ public class CategoriaService {
 	public Categoria buscarCategoriaPorID(Integer idCategoria) {
 		
 		Optional<Categoria> cat = catRepo.findById(idCategoria);
-		//() -> = Representação Lambda - Função vazia recebendo a Exception
+		
+							 //() -> = Representação Lambda - Função vazia recebendo a Exception
 		return cat.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + idCategoria + ", Tipo: " + Categoria.class.getName()));
-//		return cat.orElse(null);
 		
 	}
 }

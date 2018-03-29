@@ -13,7 +13,7 @@ public interface CategoriaRepository extends JpaRepository<Categoria, Integer>{
 	 * Não precisamos implementar e criar médotos desta Interface (CategoriaRepository), ja temos o que precisamos
 	 * 
 	 * as informações <Categoria, Integer>
-	 * Categoria representa o Bean a qual este Repository (DAO) irá tratar
+	 * Categoria representa o Bean a qual este Repository (DAO) irá tratar (Deve o mesmo ser uma Entity)
 	 * Integer é o Tipo do Atributo ID (Chave definida no Bean com anotação ID) da categoria
 	 */
 	

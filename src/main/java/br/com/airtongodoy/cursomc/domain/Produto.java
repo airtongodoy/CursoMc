@@ -26,8 +26,10 @@ public class Produto implements Serializable{
 	private String nome;
 	
 	private Double preco;
-
-	@JsonBackReference
+	
+	/*Como trata-se de uma referência ciclica, pois o Produto possui Categoria E a categoria também possui produto, 
+	 * estamos informando que esta redundancia está sendo tratada na outra Classe, que no caso é a Categoria.*/
+	@JsonBackReference 
 	@ManyToMany /* Muitos para muitos */
 	@JoinTable(name = "PRODUTO_CATEGORIA", /* Definir qual será a tabela de domínio (associativa) para vincular as duas tabelas */
 	joinColumns = @JoinColumn(name = "produto_id"), /* Nesta classe, informar a Chave estrangeira desta tabela) */
