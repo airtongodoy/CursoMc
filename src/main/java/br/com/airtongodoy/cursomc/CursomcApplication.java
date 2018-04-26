@@ -9,10 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.airtongodoy.cursomc.domain.Categoria;
 import br.com.airtongodoy.cursomc.domain.Cidade;
+import br.com.airtongodoy.cursomc.domain.Cliente;
+import br.com.airtongodoy.cursomc.domain.Endereco;
 import br.com.airtongodoy.cursomc.domain.Estado;
 import br.com.airtongodoy.cursomc.domain.Produto;
+import br.com.airtongodoy.cursomc.domain.enums.TipoCliente;
 import br.com.airtongodoy.cursomc.repositories.CategoriaRepository;
 import br.com.airtongodoy.cursomc.repositories.CidadeRepository;
+import br.com.airtongodoy.cursomc.repositories.ClienteRepository;
+import br.com.airtongodoy.cursomc.repositories.EnderecoRepository;
 import br.com.airtongodoy.cursomc.repositories.EstadoRepository;
 import br.com.airtongodoy.cursomc.repositories.ProdutoRepository;
 
@@ -30,6 +35,12 @@ public class CursomcApplication implements CommandLineRunner{
 
 	@Autowired
 	private EstadoRepository estadoRepositoryProxy;
+	
+	@Autowired
+	private ClienteRepository clienteRepositoryProxy;
+	
+	@Autowired
+	private EnderecoRepository enderecoRepositoryProxy;
 	
 	/*@Autowired  instancia automáticamente a classe pelo Spring pelo mecanisco de Injeção de dependencias*/
 	
@@ -72,6 +83,18 @@ public class CursomcApplication implements CommandLineRunner{
 		
 		estadoRepositoryProxy.saveAll(Arrays.asList(est1, est2));
 		cidadeRepositoryProxy.saveAll(Arrays.asList(c1,c2,c3));
+		
+		
+		Cliente cli1 = new Cliente(null, "Maria Silva", "maria@gmail.com", "36378912377", TipoCliente.PESSOA_FISICA);
+		cli1.getTelefones().addAll(Arrays.asList("46054605", "41324132"));
+		
+		Endereco end1 = new Endereco(null, "Rua que sobe e desce", "300", "Apto 123", "Jardim", "32828322", cli1, c1);
+		Endereco end2 = new Endereco(null, "Rua do Lado", "54", "N/A", "De Cima", "12345", cli1, c2);
+		
+		cli1.getEnderecos().addAll(Arrays.asList(end1, end2));
+		
+		clienteRepositoryProxy.save(cli1);
+		enderecoRepositoryProxy.saveAll(Arrays.asList(end1,end2));
 		
 	}
 	
