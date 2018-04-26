@@ -14,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import br.com.airtongodoy.cursomc.domain.enums.TipoCliente;
 
 @Entity
@@ -30,7 +32,7 @@ public class Cliente implements Serializable {
 	
 	private Integer tipo; //Refere-se ao TipoCliente (Enum)
 	
-	
+	@JsonManagedReference
 	@OneToMany(mappedBy="cliente")//Informando qual nome do atributo na classe Referenciada (Endereco)
 	private List<Endereco> enderecos = new ArrayList<>();
 	
@@ -87,8 +89,8 @@ public class Cliente implements Serializable {
 		return TipoCliente.toEnum(tipo);
 	}
 
-	public void setTipo(TipoCliente tipo) {
-		this.tipo = tipo.getCodigo();
+	public void setTipo(Integer tipo) {
+		this.tipo = tipo;
 	}
 
 	public List<Endereco> getEnderecos() {

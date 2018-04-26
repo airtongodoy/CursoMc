@@ -96,6 +96,8 @@ public class CursomcApplication implements CommandLineRunner{
 		clienteRepositoryProxy.save(cli1);
 		enderecoRepositoryProxy.saveAll(Arrays.asList(end1,end2));
 		
+		
+		
 	}
 	
 }
