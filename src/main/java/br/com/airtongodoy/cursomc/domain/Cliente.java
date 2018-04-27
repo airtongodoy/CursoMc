@@ -14,8 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.airtongodoy.cursomc.domain.enums.TipoCliente;
 
@@ -33,7 +32,6 @@ public class Cliente implements Serializable {
 	
 	private Integer tipo; //Refere-se ao TipoCliente (Enum)
 	
-	@JsonManagedReference
 	@OneToMany(mappedBy="cliente")//Informando qual nome do atributo na classe Referenciada (Endereco)
 	private List<Endereco> enderecos = new ArrayList<>();
 	
@@ -41,7 +39,7 @@ public class Cliente implements Serializable {
 	@CollectionTable(name="telefone")
 	private Set<String> telefones = new HashSet<>();
 	
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy="cliente")
 	private List<Pedido> pedidos = new ArrayList<>();//1 Cliente tem vários pedidos, e no pedido usa o atributo cliente para mapear
 	

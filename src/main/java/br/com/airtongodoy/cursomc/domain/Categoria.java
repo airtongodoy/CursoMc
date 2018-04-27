@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 public class Categoria implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -22,7 +20,7 @@ public class Categoria implements Serializable {
 	
 	private String nome;
 
-	@JsonManagedReference /*Esta anotação nos diz que esta entidade irá tratar (pelo JSON) a busca cíclica, pois a Categoria possui produtos, e o Produto também possui Categoria*/
+	//@ JsonManagedReference /*Esta anotação nos diz que esta entidade irá tratar (pelo JSON) a busca cíclica, pois a Categoria possui produtos, e o Produto também possui Categoria*/
 	@ManyToMany(mappedBy="categorias") /* Informa qual o outro lado que vincula esta tabela com o muitos para muitos */
 	private List<Produto> produtos = new ArrayList<>();
 	
