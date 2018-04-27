@@ -13,6 +13,7 @@ import br.com.airtongodoy.cursomc.domain.Cidade;
 import br.com.airtongodoy.cursomc.domain.Cliente;
 import br.com.airtongodoy.cursomc.domain.Endereco;
 import br.com.airtongodoy.cursomc.domain.Estado;
+import br.com.airtongodoy.cursomc.domain.ItemPedido;
 import br.com.airtongodoy.cursomc.domain.Pagamento;
 import br.com.airtongodoy.cursomc.domain.PagamentoComBoleto;
 import br.com.airtongodoy.cursomc.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import br.com.airtongodoy.cursomc.repositories.CidadeRepository;
 import br.com.airtongodoy.cursomc.repositories.ClienteRepository;
 import br.com.airtongodoy.cursomc.repositories.EnderecoRepository;
 import br.com.airtongodoy.cursomc.repositories.EstadoRepository;
+import br.com.airtongodoy.cursomc.repositories.ItemPedidoRepository;
 import br.com.airtongodoy.cursomc.repositories.PagamentoRepository;
 import br.com.airtongodoy.cursomc.repositories.PedidoRepository;
 import br.com.airtongodoy.cursomc.repositories.ProdutoRepository;
@@ -55,6 +57,9 @@ public class CursomcApplication implements CommandLineRunner{
 	
 	@Autowired
 	private PagamentoRepository pagamentoRepositoryProxy;
+
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepositoryProxy;
 	
 	/*@Autowired  instancia automáticamente a classe pelo Spring pelo mecanisco de Injeção de dependencias*/
 	
@@ -125,6 +130,20 @@ public class CursomcApplication implements CommandLineRunner{
 		
 		pedidoRepositoryProxy.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepositoryProxy.saveAll(Arrays.asList(pagto1, pagto2));
+		
+		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1,ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		itemPedidoRepositoryProxy.saveAll(Arrays.asList(ip1,ip2,ip3));
 	}
 	
 }
